@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather TEST</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/style.css" />
+    <script
+      src="https://kit.fontawesome.com/848d98e282.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card shadow">
+        <div class="card-body">
+          <form class="search-form" id="search-form">
+            <div class="input-group rounded">
+              <input
+                type="search"
+                class="form-control rounded"
+                placeholder="Enter a city to search"
+                autofocus="on"
+                autocomplete="off"
+                id="city-input"
+              />
+
+              <span>
+                <input
+                  id="search-button"
+                  type="submit"
+                  value="Search"
+                  class="form-control btn btn-primary shadow-sm"
+                />
+              </span>
+              <span class="current">
+                <input
+                  id="current-button"
+                  type="submit"
+                  value="Current"
+                  class="form-control btn btn-info shadow-sm"
+                />
+              </span>
+            </div>
+          </form>
+          <h1 id="current-city">Minneapolis</h1>
+          <h2 id="date-time">date and time</h2>
+          <div class="row">
+            <div class="col">
+              <h3>☀️</h3>
+            </div>
+            <div class="col">
+              <span class="degree" id="current-temp">82°F</span>
+              <h4 id="description">Sunny</h4>
+            </div>
+            <div class="col daily">
+              <div id="low-temp">Low: <strong>62°F</strong></div>
+              <div id="high-temp">High: <strong>80°F</strong></div>
+              <div id="wind">Wind: <strong>12 mph</strong></div>
+              <!-- <div id="precip">Precipitation: <strong>1%</strong></div> -->
+              <div id="humidity">Humidity: <strong>58%</strong></div>
+            </div>
+            <div class="weekly-forecast">
+              <div class="row">
+                <div class="col-2">
+                  <h5>Thurs</h5>
+                  <h6>🌦️</h6>
+                  <p>
+                    Low: <strong> 61°F </strong>
+                    <br />
+                    High: <strong> 81°F </strong>
+                  </p>
+                </div>
+                <div class="col-2">
+                  <h5>Fri</h5>
+                  <h6>☀️</h6>
+                  <p>
+                    Low: <strong> 61°F </strong>
+                    <br />
+                    High: <strong> 84°F </strong>
+                  </p>
+                </div>
+                <div class="col-2">
+                  <h5>Sat</h5>
+                  <h6>⛅</h6>
+                  <p>
+                    Low: <strong> 62°F </strong>
+                    <br />
+                    High: <strong> 86°F </strong>
+                  </p>
+                </div>
+                <div class="col-2">
+                  <h5>Sun</h5>
+                  <h6>⛈️</h6>
+                  <p>
+                    Low: <strong> 65°F </strong>
+                    <br />
+                    High: <strong> 89°F </strong>
+                  </p>
+                </div>
+                <div class="col-2">
+                  <h5>Mon</h5>
+                  <h6>☀️</h6>
+                  <p>
+                    Low: <strong> 69°F </strong>
+                    <br />
+                    High: <strong> 90°F </strong>
+                  </p>
+                </div>
+                <div class="col-2">
+                  <h5>Tues</h5>
+                  <h6>⛅</h6>
+                  <p>
+                    Low: <strong> 65°F </strong>
+                    <br />
+                    High: <strong> 82°F </strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="src/app.js"></script>
+  </body>
+</html>
