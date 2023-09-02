@@ -1,62 +1,30 @@
-function loadNewCityTemp(response) {
-  let heading = document.querySelector("h1");
-  heading.innerHTML = response.data.name;
-
-  let temperature = Math.round(response.data.main.temp);
-  let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = `${temperature}°F`;
-
-  let lowTemp = Math.round(response.data.main.temp_min);
-  let lowTempPlaceholder = document.querySelector("#low-temp");
-  lowTempPlaceholder.innerHTML = `Low: <strong>${lowTemp}°F</strong>`;
-
-  let highTemp = Math.round(response.data.main.temp_max);
-  let highTempPlaceholder = document.querySelector("#high-temp");
-  highTempPlaceholder.innerHTML = `High: <strong>${highTemp}°F</strong>`;
-
-  let wind = Math.round(response.data.wind.speed);
-  let windPlaceholder = document.querySelector("#wind");
-  windPlaceholder.innerHTML = `Wind: <strong>${wind} mph</strong>`;
-
-  let humidity = Math.round(response.data.main.humidity);
-  let humidityPlaceholder = document.querySelector("#humidity");
-  humidityPlaceholder.innerHTML = `Humidity: <strong>${humidity}%`;
-
-  let description = response.data.weather[0].description;
-  let descriptionPlaceholder = document.querySelector("#description");
-  descriptionPlaceholder.innerHTML =
-    description.charAt(0).toUpperCase() + description.slice(1);
+function formatDate(timestamp) {
+  //calculate the date
+  return "Friday 5:00";
 }
 
-function showCurrentTemperature(response) {
-  console.log(response.data);
-  let heading = document.querySelector("h1");
-  heading.innerHTML = response.data.name;
+function showWeather(response) {
+  let cityElement = document.querySelector("#current-city");
+  let currentTempElement = document.querySelector("#current-temp");
+  let lowTempElement = document.querySelector("#low-temp");
+  let highTempElement = document.querySelector("#high-temp");
+  let windElement = document.querySelector("#wind");
+  let humidityElement = document.querySelector("#humidity");
+  let descriptionElement = document.querySelector("#description");
 
-  let temperature = Math.round(response.data.main.temp);
-  let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = `${temperature}°F`;
-
-  let lowTemp = Math.round(response.data.main.temp_min);
-  let lowTempPlaceholder = document.querySelector("#low-temp");
-  lowTempPlaceholder.innerHTML = `Low: <strong>${lowTemp}°F</strong>`;
-
-  let highTemp = Math.round(response.data.main.temp_max);
-  let highTempPlaceholder = document.querySelector("#high-temp");
-  highTempPlaceholder.innerHTML = `High: <strong>${highTemp}°F</strong>`;
-
-  let wind = Math.round(response.data.wind.speed);
-  let windPlaceholder = document.querySelector("#wind");
-  windPlaceholder.innerHTML = `Wind: <strong>${wind} mph</strong>`;
-
-  let humidity = Math.round(response.data.main.humidity);
-  let humidityPlaceholder = document.querySelector("#humidity");
-  humidityPlaceholder.innerHTML = `Humidity: <strong>${humidity}%`;
-
-  let description = response.data.weather[0].description;
-  let descriptionPlaceholder = document.querySelector("#description");
-  descriptionPlaceholder.innerHTML =
-    description.charAt(0).toUpperCase() + description.slice(1);
+  cityElement.innerHTML = response.data.name;
+  currentTempElement.innerHTML = `${Math.round(response.data.main.temp)}`;
+  lowTempElement.innerHTML = `Low: <strong>${Math.round(
+    response.data.main.temp_min
+  )}°F</strong>`;
+  highTempElement.innerHTML = `High: <strong>${Math.round(
+    response.data.main.temp_max
+  )}°F</strong>`;
+  windElement.innerHTML = `Wind: <strong>${Math.round(
+    response.data.wind.speed
+  )} mph</strong>`;
+  humidityElement.innerHTML = `Humidity: <strong>${response.data.main.humidity}%`;
+  descriptionElement.innerHTML = response.data.weather[0].description;
 }
 
 function showCurrentWeather(position) {
@@ -64,7 +32,7 @@ function showCurrentWeather(position) {
   let longitude = position.coords.longitude;
   let apiKey = "0efb4fc16a9ed98dc0b3aafd8491d6ad";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
-  axios.get(apiUrl).then(showCurrentTemperature);
+  axios.get(apiUrl).then(showWeather);
 }
 
 function inputNewCity(event) {
@@ -75,7 +43,7 @@ function inputNewCity(event) {
   heading.innerHTML = newCity;
   let apiKey = "0efb4fc16a9ed98dc0b3aafd8491d6ad";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${newCity}&appid=${apiKey}&units=imperial`;
-  axios.get(apiUrl).then(loadNewCityTemp);
+  axios.get(apiUrl).then(showWeather);
 }
 
 let searchButton = document.querySelector("#search-button");
