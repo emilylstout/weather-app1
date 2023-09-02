@@ -67,3 +67,6 @@ p {
 #current-button {
   margin: 0 15px;
 }
+#description {
+  text-transform: capitalize;
+}
