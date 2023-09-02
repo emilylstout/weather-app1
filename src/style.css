@@ -11,16 +11,19 @@ h1 {
 }
 h2 {
   text-align: left;
+  font-size: 14px;
+  position: relative;
+  top: -10px;
+}
+
+h4 {
+  text-align: center;
   font-size: 18px;
   position: relative;
   top: -15px;
 }
-
-h4 {
-  font-size: 20px;
-}
 h5 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
 }
 h6 {
@@ -30,6 +33,10 @@ h6 {
 p {
   font-size: 14px;
 }
+ul {
+  font-size: 14px;
+  list-style: none;
+}
 .container {
   margin-top: 50px;
 }
@@ -38,11 +45,11 @@ p {
   max-width: 600px;
   margin: 0 auto;
 }
-.weekly-forecast {
-  margin-top: -40px;
-}
-.daily {
+
+#daily {
   text-align: left;
+  position: relative;
+  top: 30px;
 }
 #units {
   font-size: 15px;
@@ -53,7 +60,6 @@ p {
 #current-temp {
   font-size: 55px;
   font-weight: bold;
-  margin-top: 10px;
 }
 #search-button {
   margin-left: 10px;
@@ -63,9 +69,4 @@ p {
 }
 #description:first-letter {
   text-transform: capitalize;
-}
-#icon {
-  position: relative;
-  top: -40px;
-  left: -30px;
 }

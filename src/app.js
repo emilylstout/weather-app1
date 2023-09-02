@@ -10,9 +10,17 @@ function formatDate(timestamp) {
     "Saturday",
   ];
   let day = days[date.getDay()];
-  let hours = date.getHours();
   let minutes = date.getMinutes();
-  return `${day} ${hours}:${minutes}`;
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  let hours = date.getHours();
+  if (hours > 12) {
+    hours = hours - 12;
+    return `${day} ${hours}:${minutes} pm`;
+  } else {
+    return `${day} ${hours}:${minutes} am`;
+  }
 }
 
 function showWeather(response) {
@@ -20,39 +28,32 @@ function showWeather(response) {
   let cityElement = document.querySelector("#current-city");
   let timeElement = document.querySelector("#date-time");
   let currentTempElement = document.querySelector("#current-temp");
-  let lowTempElement = document.querySelector("#low-temp");
-  let highTempElement = document.querySelector("#high-temp");
+  let feelsLikeElement = document.querySelector("#feels-like");
   let windElement = document.querySelector("#wind");
   let humidityElement = document.querySelector("#humidity");
   let descriptionElement = document.querySelector("#description");
   let iconElement = document.querySelector("#icon");
 
-  cityElement.innerHTML = response.data.name;
-  timeElement.innerHTML = formatDate(response.data.dt * 1000);
-  currentTempElement.innerHTML = `${Math.round(response.data.main.temp)}`;
-  lowTempElement.innerHTML = `Low: <strong>${Math.round(
-    response.data.main.temp_min
-  )}°F</strong>`;
-  highTempElement.innerHTML = `High: <strong>${Math.round(
-    response.data.main.temp_max
-  )}°F</strong>`;
-  windElement.innerHTML = `Wind: <strong>${Math.round(
-    response.data.wind.speed
-  )} mph</strong>`;
-  humidityElement.innerHTML = `Humidity: <strong>${response.data.main.humidity}%`;
-  descriptionElement.innerHTML = response.data.weather[0].description;
-  iconElement.setAttribute(
-    "src",
-    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`
-  );
-  iconElement.setAttribute("alt", response.data.weather[0].description);
+  cityElement.innerHTML = response.data.city;
+  timeElement.innerHTML = formatDate(response.data.time * 1000);
+  currentTempElement.innerHTML = `${Math.round(
+    response.data.temperature.current
+  )}`;
+  feelsLikeElement.innerHTML = Math.round(response.data.temperature.feels_like);
+  windElement.innerHTML = Math.round(response.data.wind.speed);
+  humidityElement.innerHTML = response.data.temperature.humidity;
+  descriptionElement.innerHTML = response.data.condition.description;
+  iconElement.setAttribute("src", response.data.condition.icon_url);
+  iconElement.setAttribute("alt", response.data.condition.description);
 }
 
 function showCurrentWeather(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
-  let apiKey = "0efb4fc16a9ed98dc0b3aafd8491d6ad";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+  console.log(latitude);
+  console.log(longitude);
+  let apiKey = "56203a1146fb1d1e095940bod3ea0ft6";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(showWeather);
 }
 
@@ -60,8 +61,8 @@ function inputNewCity(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#city-input");
   let newCity = cityInput.value;
-  let apiKey = "0efb4fc16a9ed98dc0b3aafd8491d6ad";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${newCity}&appid=${apiKey}&units=imperial`;
+  let apiKey = "56203a1146fb1d1e095940bod3ea0ft6";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${newCity}&key=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(showWeather);
 }
 
