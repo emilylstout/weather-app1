@@ -11,15 +11,9 @@ h1 {
 }
 h2 {
   text-align: left;
-  font-size: 25px;
-  font-weight: bold;
+  font-size: 18px;
   position: relative;
   top: -15px;
-}
-
-h3 {
-  font-size: 110px;
-  margin: 0;
 }
 
 h4 {
@@ -45,7 +39,7 @@ p {
   margin: 0 auto;
 }
 .weekly-forecast {
-  margin-top: 20px;
+  margin-top: -40px;
 }
 .daily {
   text-align: left;
@@ -67,6 +61,11 @@ p {
 #current-button {
   margin: 0 15px;
 }
-#description {
+#description:first-letter {
   text-transform: capitalize;
+}
+#icon {
+  position: relative;
+  top: -40px;
+  left: -30px;
 }
