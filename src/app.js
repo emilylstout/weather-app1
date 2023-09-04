@@ -33,7 +33,7 @@ function showWeather(response) {
   let humidityElement = document.querySelector("#humidity");
   let descriptionElement = document.querySelector("#description");
   let iconElement = document.querySelector("#icon");
-
+  fTemp = response.data.temperature.current;
   cityElement.innerHTML = response.data.city;
   timeElement.innerHTML = formatDate(response.data.time * 1000);
   currentTempElement.innerHTML = `${Math.round(
@@ -50,8 +50,6 @@ function showWeather(response) {
 function showCurrentWeather(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
-  console.log(latitude);
-  console.log(longitude);
   let apiKey = "56203a1146fb1d1e095940bod3ea0ft6";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(showWeather);
@@ -66,6 +64,25 @@ function inputNewCity(event) {
   axios.get(apiUrl).then(showWeather);
 }
 
+function showCelsiusTemp(event) {
+  event.preventDefault();
+  showCelsiusLink.classList.add("selected");
+  showFahrenheitLink.classList.remove("selected");
+  let currentTempElement = document.querySelector("#current-temp");
+  let cTemp = ((fTemp - 32) * 5) / 9;
+  currentTempElement.innerHTML = Math.round(cTemp);
+}
+
+function showFahrenheitTemp(event) {
+  event.preventDefault();
+  showCelsiusLink.classList.remove("selected");
+  showFahrenheitLink.classList.add("selected");
+  let currentTempElement = document.querySelector("#current-temp");
+  currentTempElement.innerHTML = Math.round(fTemp);
+}
+
+let fTemp = null;
+
 let searchButton = document.querySelector("#search-button");
 searchButton.addEventListener("click", inputNewCity);
 
@@ -73,3 +90,9 @@ let currentButton = document.querySelector("#current-button");
 currentButton.addEventListener("click", showCurrentWeather);
 
 navigator.geolocation.getCurrentPosition(showCurrentWeather);
+
+let showCelsiusLink = document.querySelector("#show-celsius-link");
+showCelsiusLink.addEventListener("click", showCelsiusTemp);
+
+let showFahrenheitLink = document.querySelector("#show-fahrenheit-link");
+showFahrenheitLink.addEventListener("click", showFahrenheitTemp);

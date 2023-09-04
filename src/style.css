@@ -63,10 +63,19 @@ ul {
 }
 #search-button {
   margin-left: 10px;
+  margin-right: 20px;
+  padding: 6px 1px;
 }
 #current-button {
-  margin: 0 15px;
+  margin-right: 15px;
+  padding: 6px 1px;
 }
 #description:first-letter {
   text-transform: capitalize;
+}
+
+.selected {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
 }

@@ -51,7 +51,7 @@
                   id="current-button"
                   type="submit"
                   value="Current"
-                  class="form-control btn btn-info shadow-sm"
+                  class="form-control btn btn-primary shadow-sm"
                 />
               </span>
             </div>
@@ -66,7 +66,10 @@
             </div>
             <div class="col-4">
               <span id="current-temp"></span>
-              <span id="units">°F | °C</span>
+              <span id="units"
+                ><a href="#" id="show-fahrenheit-link" class="selected">°F</a>|
+                <a href="#" id="show-celsius-link">°C</a></span
+              >
               <h4 id="description"></h4>
             </div>
             <ul class="col-4" id="daily">
