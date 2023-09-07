@@ -47,6 +47,27 @@ function showWeather(response) {
   iconElement.setAttribute("alt", response.data.condition.description);
 }
 
+function showForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  let days = ["Thurs", "Fri", "Sat", "Sun"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+      <h5>${day}</h5>
+      <h6>🌦️</h6>
+      <p>High: <strong> 81°F </strong>
+      <br />
+      Low: <strong> 61°F </strong>
+      </p>
+    </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function showCurrentWeather(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
@@ -96,3 +117,5 @@ showCelsiusLink.addEventListener("click", showCelsiusTemp);
 
 let showFahrenheitLink = document.querySelector("#show-fahrenheit-link");
 showFahrenheitLink.addEventListener("click", showFahrenheitTemp);
+
+showForecast();
