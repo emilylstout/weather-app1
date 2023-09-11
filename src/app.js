@@ -23,6 +23,13 @@ function formatDate(timestamp) {
   }
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
 function showWeather(response) {
   console.log(response.data);
   let cityElement = document.querySelector("#current-city");
@@ -45,28 +52,60 @@ function showWeather(response) {
   descriptionElement.innerHTML = response.data.condition.description;
   iconElement.setAttribute("src", response.data.condition.icon_url);
   iconElement.setAttribute("alt", response.data.condition.description);
+  let city = response.data.city;
+  let apiKey = "56203a1146fb1d1e095940bod3ea0ft6";
+  let forecastUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=imperial`;
+  axios.get(forecastUrl).then(showForecast);
 }
 
-function showForecast() {
+function showForecast(response) {
+  let forecast = response.data.daily;
+  console.log(forecast);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Thurs", "Fri", "Sat", "Sun"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-      <h5>${day}</h5>
-      <h6>🌦️</h6>
-      <p>High: <strong> 81°F </strong>
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+      <h5>${formatDay(forecastDay.time)}</h5>
+      <img src=${forecastDay.condition.icon_url} alt=${
+          forecastDay.condition.description
+        }>
+      <p>High: <strong> ${Math.round(
+        forecastDay.temperature.maximum
+      )}°F </strong>
       <br />
-      Low: <strong> 61°F </strong>
+      Low: <strong> ${Math.round(forecastDay.temperature.minimum)}°F </strong>
       </p>
     </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
+
+// nction displayForecast(response){
+//     let forecast = response.data.daily;
+//     let forecastElement = document.querySelector("#weather-forecast");
+//     let forecastHtml = `<div class="row">`;
+//     forecast.forEach(function (forecastDay, index){
+//         if (index < 6){
+//     forecastHtml = forecastHtml + `
+//                         <div class="col-2">
+//                             <div class="weather-forecast-date">${formatDay(forecastDay.time * 1000)}</div>
+//                             <img src="${forecastDay.condition.icon_url}" alt="" width="42">
+//                             <div class="weather-forecast-temperature">
+//                                 <span class="weather-forecast-temperature-max">${Math.round(forecastDay.temperature.maximum)}°</span>
+//                                 <span class="weather-forecast-temperature-min">${Math.round(forecastDay.temperature.minimum)}°</span>
+//                             </div>
+//                         </div>
+//                     `;}})
+//     forecastHtml = forecastHtml + `</div>`
+
+//     forecastElement.innerHTML = forecastHtml;
 
 function showCurrentWeather(position) {
   let latitude = position.coords.latitude;
@@ -117,5 +156,3 @@ showCelsiusLink.addEventListener("click", showCelsiusTemp);
 
 let showFahrenheitLink = document.querySelector("#show-fahrenheit-link");
 showFahrenheitLink.addEventListener("click", showFahrenheitTemp);
-
-showForecast();
