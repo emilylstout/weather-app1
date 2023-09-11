@@ -73,9 +73,9 @@ function showForecast(response) {
         } width=70px>
       <p>High: <strong> ${Math.round(
         forecastDay.temperature.maximum
-      )}°F </strong>
+      )}</strong>°F 
       <br />
-      Low: <strong> ${Math.round(forecastDay.temperature.minimum)}°F </strong>
+      Low: <strong> ${Math.round(forecastDay.temperature.minimum)}</strong>°F
       </p>
     </div>`;
     }
