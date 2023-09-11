@@ -23,7 +23,7 @@ h4 {
   top: -15px;
 }
 h5 {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
 }
 h6 {
@@ -72,10 +72,4 @@ ul {
 }
 #description:first-letter {
   text-transform: capitalize;
-}
-
-.selected {
-  color: black;
-  cursor: pointer;
-  text-decoration: none;
 }

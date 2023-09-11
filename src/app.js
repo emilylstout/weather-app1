@@ -70,7 +70,7 @@ function showForecast(response) {
       <h5>${formatDay(forecastDay.time)}</h5>
       <img src=${forecastDay.condition.icon_url} alt=${
           forecastDay.condition.description
-        }>
+        } width=70px>
       <p>High: <strong> ${Math.round(
         forecastDay.temperature.maximum
       )}°F </strong>
@@ -102,23 +102,6 @@ function inputNewCity(event) {
   axios.get(apiUrl).then(showWeather);
 }
 
-function showCelsiusTemp(event) {
-  event.preventDefault();
-  showCelsiusLink.classList.add("selected");
-  showFahrenheitLink.classList.remove("selected");
-  let currentTempElement = document.querySelector("#current-temp");
-  let cTemp = ((fTemp - 32) * 5) / 9;
-  currentTempElement.innerHTML = Math.round(cTemp);
-}
-
-function showFahrenheitTemp(event) {
-  event.preventDefault();
-  showCelsiusLink.classList.remove("selected");
-  showFahrenheitLink.classList.add("selected");
-  let currentTempElement = document.querySelector("#current-temp");
-  currentTempElement.innerHTML = Math.round(fTemp);
-}
-
 let fTemp = null;
 
 let searchButton = document.querySelector("#search-button");
@@ -128,9 +111,3 @@ let currentButton = document.querySelector("#current-button");
 currentButton.addEventListener("click", showCurrentWeather);
 
 navigator.geolocation.getCurrentPosition(showCurrentWeather);
-
-let showCelsiusLink = document.querySelector("#show-celsius-link");
-showCelsiusLink.addEventListener("click", showCelsiusTemp);
-
-let showFahrenheitLink = document.querySelector("#show-fahrenheit-link");
-showFahrenheitLink.addEventListener("click", showFahrenheitTemp);
